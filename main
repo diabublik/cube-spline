@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include "Header.h"
+
+int main() {
+    int numofpoints;
+    float* xarray, * yarray;
+    puts("Input the num of points:");
+    scanf_s("%d", &numofpoints);
+    xarray = new float[numofpoints];
+    yarray = new float[numofpoints];
+    puts("Input the coordinates of your points:\n");
+    for (int i = 0; i < numofpoints; i++) {
+        scanf_s("%f %f", &xarray[i], &yarray[i]);
+    }
+    puts("\nInputed coordinates of points:\n");
+    for (int i = 0; i < numofpoints; i++) {
+        printf("(  %.3f ; %.3f  )  ", xarray[i], yarray[i]);
+    }
+    double** matrix;
+    int lines = 4 + 6 * (numofpoints - 2);
+    int columns = 5;
+    matrix = new double* [lines];
+    for (int i = 0; i < lines; i++) matrix[i] = new double[columns];
+    Jordan_Gaus(matrix, numofpoints, lines, columns, xarray, yarray);
+
+    return 0;
+}
